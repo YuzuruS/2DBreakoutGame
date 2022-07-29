@@ -7,19 +7,30 @@ var x = canvas.width / 2;
 var y = canvas.height - 30;
 var dx = 2;
 var dy = -2;
+
+// バーの高さ
 var paddleHeight = 10;
+// バーの幅
 var paddleWidth = 75;
 var paddleX = (canvas.width - paddleWidth) / 2;
+// 右ボタンがおされたか
 var rightPressed = false;
+// 左ボタンがおされたか
 var leftPressed = false;
 
-// ブロックの設定
+// ブロックの列数
 var brickRowCount = 5;
+// ブロックの行数
 var brickColumnCount = 3;
+// ブロックの幅
 var brickWidth = 75;
+// ブロックの高さ
 var brickHeight = 20;
+// ブロックの同士の隙間
 var brickPadding = 10;
+// ブロックの上端からの位置
 var brickOffsetTop = 30;
+// ブロックの左端からの位置
 var brickOffsetLeft = 30;
 
 // スコアのデフォルト値
