@@ -75,6 +75,7 @@ function collisionDetection() {
   }
 }
 
+// ボールの表示
 function drawBall() {
   ctx.beginPath();
   ctx.arc(x, y, ballRadius, 0, Math.PI * 2);
@@ -82,6 +83,8 @@ function drawBall() {
   ctx.fill();
   ctx.closePath();
 }
+
+// バーの表示
 function drawPaddle() {
   ctx.beginPath();
   ctx.rect(paddleX, canvas.height - paddleHeight, paddleWidth, paddleHeight);
@@ -89,6 +92,8 @@ function drawPaddle() {
   ctx.fill();
   ctx.closePath();
 }
+
+// レンガの表示
 function drawBricks() {
   for (var c = 0; c < brickColumnCount; c++) {
     for (var r = 0; r < brickRowCount; r++) {
@@ -106,17 +111,22 @@ function drawBricks() {
     }
   }
 }
+
+// scoreの表示
 function drawScore() {
   ctx.font = "16px Arial";
   ctx.fillStyle = "#0095DD";
   ctx.fillText("Score: " + score, 8, 20);
 }
+
+// 残りライフの表示
 function drawLives() {
   ctx.font = "16px Arial";
   ctx.fillStyle = "#0095DD";
   ctx.fillText("Lives: " + lives, canvas.width - 65, 20);
 }
 
+// 残りライフの表示
 function draw() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
   drawBricks();
