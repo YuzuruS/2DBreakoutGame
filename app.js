@@ -1,5 +1,7 @@
 var canvas = document.getElementById("myCanvas");
 var ctx = canvas.getContext("2d");
+
+// ボール半径
 var ballRadius = 10;
 var x = canvas.width / 2;
 var y = canvas.height - 30;
@@ -10,6 +12,8 @@ var paddleWidth = 75;
 var paddleX = (canvas.width - paddleWidth) / 2;
 var rightPressed = false;
 var leftPressed = false;
+
+// ブロックの設定
 var brickRowCount = 5;
 var brickColumnCount = 3;
 var brickWidth = 75;
@@ -17,7 +21,11 @@ var brickHeight = 20;
 var brickPadding = 10;
 var brickOffsetTop = 30;
 var brickOffsetLeft = 30;
+
+// スコアのデフォルト値
 var score = 0;
+
+// ライフ
 var lives = 3;
 
 var bricks = [];
@@ -78,6 +86,10 @@ function collisionDetection() {
 // ボールの表示
 function drawBall() {
   ctx.beginPath();
+  // 円の中心のx、y座標
+  // 円の半径
+  // 開始角度と終了角度 (円を描く始める時点の角度と描き終えたあとの角度をラジアンで)
+  //描く方向 (時計回りはfalseで、デフォルト。半時計回りはtrue。) この最後のパラメーターは省略可能です。
   ctx.arc(x, y, ballRadius, 0, Math.PI * 2);
   ctx.fillStyle = "#0095DD";
   ctx.fill();
@@ -126,7 +138,7 @@ function drawLives() {
   ctx.fillText("Lives: " + lives, canvas.width - 65, 20);
 }
 
-// 残りライフの表示
+
 function draw() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
   drawBricks();
@@ -136,22 +148,30 @@ function draw() {
   drawLives();
   collisionDetection();
 
+  // 左右の壁でボールを弾ませる
   if (x + dx > canvas.width - ballRadius || x + dx < ballRadius) {
     dx = -dx;
   }
+  // 上の壁でボールを弾ませる
   if (y + dy < ballRadius) {
     dy = -dy;
   }
+  // 下の壁に到達
   else if (y + dy > canvas.height - ballRadius) {
+    // バーにボールが当たったら
     if (x > paddleX && x < paddleX + paddleWidth) {
       dy = -dy;
     }
+    // 下の壁にボールがあたったら
     else {
+      // ライフを1減らす
       lives--;
+      // ライフが0になったら
       if (!lives) {
         alert("GAME OVER");
         document.location.reload();
       }
+      // スタート位置に戻す
       else {
         x = canvas.width / 2;
         y = canvas.height - 30;
@@ -162,9 +182,11 @@ function draw() {
     }
   }
 
+  // 右ボタンが押されたらバーを動かす
   if (rightPressed && paddleX < canvas.width - paddleWidth) {
     paddleX += 7;
   }
+  // 左ボタンが押されたらバーを動かす
   else if (leftPressed && paddleX > 0) {
     paddleX -= 7;
   }
